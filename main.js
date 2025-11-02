@@ -105,7 +105,9 @@ showAnswerBtn.addEventListener('click',()=>{
 })
 
 resetBtn.addEventListener('click',function(){
-    showToast("你真的要放棄嗎，你這個爛貨！")
+    showToast("你真的要放棄嗎，你這個爛貨！");
+    answer = [];
+    getRandomAnswer();
     resetGame();
 })
 
