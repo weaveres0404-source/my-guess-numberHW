@@ -1,0 +1,290 @@
+/* 重置默認樣式 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #38f982 0%, #04f4ec 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+body.modal-open {
+    display: block !important;
+    padding-right: 0 !important;
+}
+
+.game-container {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    /* backdrop-filter: blur(10px); 暫時註解，可能影響 Modal */
+    max-width: 500px;
+    width: 100%;
+    text-align: center;
+}
+
+.text-center {
+    color: #333;
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    background: linear-gradient(45deg, #000000, #000000);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: bold;
+}
+
+.btn-group {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+button {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 25px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    min-width: 120px;
+}
+
+button:not(:disabled) {
+    background: linear-gradient(45deg, #ff7260, #764ba2);
+    color: white;
+}
+
+button:not(:disabled):hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(65, 227, 195, 0.4);
+}
+
+button:not(:disabled):active {
+    transform: translateY(0);
+}
+
+button:disabled {
+    background: #e0e0e0;
+    color: #999;
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+.input-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+    background: white;
+    border-radius: 25px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border: 2px solid transparent;
+    transition: border-color 0.3s ease;
+}
+
+.input-group:focus-within {
+    border-color: #96d4e5;
+}
+
+.input-group-text {
+    background: linear-gradient(45deg, #0adf5f, #0979db);
+    color: white;
+    padding: 15px 20px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.form-control {
+    flex: 1;
+    border: none;
+    padding: 15px 20px;
+    font-size: 16px;
+    outline: none;
+    background: transparent;
+}
+
+.form-control:disabled {
+    background: #f5f5f5;
+    color: #999;
+}
+
+.form-control::placeholder {
+    color: #aaa;
+}
+
+#guess_btn {
+    border-radius: 0 23px 23px 0;
+    margin: 2px 2px 2px 0;
+    min-width: 80px;
+}
+
+#list {
+    list-style: none;
+    max-height: 300px;
+    overflow-y: auto;
+    background: #f8f9fa;
+    border-radius: 15px;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+#list:empty::before {
+    content: "遊戲記錄會顯示在這裡";
+    color: #999;
+    font-style: italic;
+}
+
+#list li {
+    padding: 10px 15px;
+    margin: 8px 0;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: transform 0.2s ease;
+}
+
+#list li:hover {
+    transform: translateX(5px);
+}
+
+#list li .guess {
+    font-weight: bold;
+    color: #333;
+}
+
+#list li .result {
+    font-weight: 600;
+    color: #667eea;
+}
+
+/* 響應式設計 */
+@media (max-width: 600px) {
+    .game-container {
+        padding: 20px;
+        margin: 10px;
+    }
+    
+    .text-center {
+        font-size: 2rem;
+        margin-bottom: 20px;
+    }
+    
+    .btn-group {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    button {
+        min-width: 100%;
+    }
+    
+    .input-group {
+        flex-direction: column;
+        border-radius: 15px;
+    }
+    
+    .input-group-text {
+        width: 100%;
+        text-align: center;
+        border-radius: 15px 15px 0 0;
+    }
+    
+    .form-control {
+        border-radius: 0;
+    }
+    
+    #guess_btn {
+        border-radius: 0 0 15px 15px;
+        width: 100%;
+        margin: 0;
+    }
+}
+
+/* 動畫效果 */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.game-container {
+    animation: fadeIn 0.6s ease-out;
+}
+
+/* 滾動條樣式 */
+#list::-webkit-scrollbar {
+    width: 6px;
+}
+
+#list::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 3px;
+}
+
+#list::-webkit-scrollbar-thumb {
+    background: #667eea;
+    border-radius: 3px;
+}
+
+#list::-webkit-scrollbar-thumb:hover {
+    background: #764ba2;
+}
+
+/* Modal 樣式修正 */
+.modal {
+    z-index: 1055 !important;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    pointer-events: auto !important;
+}
+
+.modal-backdrop {
+    z-index: 1050 !important;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+}
+
+.modal-dialog {
+    z-index: 1060 !important;
+    position: relative !important;
+    pointer-events: auto !important;
+}
+
+.modal-content {
+    pointer-events: auto !important;
+}
+
+.modal .btn-close,
+.modal button {
+    pointer-events: auto !important;
+    z-index: 1070 !important;
+    position: relative !important;
+}
